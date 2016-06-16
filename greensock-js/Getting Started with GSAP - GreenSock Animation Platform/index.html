@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Getting Started with GSAP (GreenSock Animation Platform)</title>
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>-->
+    <script src="../src/uncompressed/TweenMax.js"></script>
+    <script>
+        window.onload = function () {
+
+            var photo = document.getElementById("photo"); //or use jQuery's $("#photo")
+            TweenLite.to(photo, 1.5, {width:100, height:100});
+
+
+
+
+            //tween the element with ID of "myID"
+            TweenLite.to("#myID", 2, {
+                backgroundColor:"#ff0000",
+                width:"50%", top:"100px",
+                ease:Power2.easeInOut,
+            });
+
+//or if jQuery is loaded, you can do more advanced selecting like all the elements with the class "myClass" like this:
+            TweenLite.to(".myClass", 2, {boxShadow:"0px 0px 20px red", color:"#FC0"});
+
+            //animate from 0 to whatever the scaleX/scaleY is now
+            var photo2 = document.getElementById("photo2");
+
+            var tlm = new TimelineMax();
+            tlm.from(photo2, 0.5, {
+                scaleX:0,
+                scaleY:0,
+//                ease:Power2.easeInOut,
+            }).to(photo2, 0.5, {
+                scaleX:0.2,
+                scaleY:0.2,
+                ease:Power2.easeInOut,
+            }).to(photo2, 0.5, {
+                x: 200,
+                scaleX:2,
+                scaleY:2,
+                backgroundColor:"#ff0000",
+//                ease:Power2.easeInOut,
+            }).to(photo2, 3, {
+                width:'100px',
+                height:'100px',
+                rotation: 360,
+                ease:Bounce.easeOut,
+            }, '-=0.4');
+
+            tlm.addCallback(function(){
+                tlm.to(photo2, 3, {
+                    rotation: -360,
+                    scaleX:0.8,
+                    scaleY:0.8,
+                    ease:Power2.easeInOut,
+                }, 'photo');
+            })
+
+            var text = document.getElementById('text').innerHTML;
+//            alert(text);
+
+        }
+
+    </script>
+    <style>
+
+
+
+        #photo{
+            background: #ff72eb;
+            opacity: 0.8;
+            width: 50px;
+            height: 50px;
+            margin: 20px;
+        }
+        #photo2{
+            border: 1px solid #4fffa5;
+            width: 50px;
+            height: 50px;
+            margin: 20px;
+            padding: 15px;
+        }
+        #myID{
+            border: 1px solid #ff0096;
+            width: 10px;
+            height: 10px;
+            margin: 20px;
+        }
+        .myClass{
+            /*border: 1px solid red;*/
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+            width: 80px;
+            height: 40px;
+            border-radius: 10%;
+            margin: 20px;
+        }
+        #text{
+            opacity: 0.2;
+            color: #ff0096;
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<div id="photo">#photo</div>
+<div id="myID"></div>
+<div class="myClass">.myClass</div>
+<div id="photo2">#photo2</div>
+<div id="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, vero.</div>
+
+</body>
+</html>
