@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Getting Started with GSAP (GreenSock Animation Platform)</title>
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>-->
+    <script src="../greensock-js/src/uncompressed/TweenMax.js"></script>
+    <script src="../greensock-js/src/minified/plugins/SplitText.min.js"></script>
+    <script   src="https://code.jquery.com/jquery-3.0.0.min.js"   integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="   crossorigin="anonymous"></script>
+    <script>
+        window.onload = function () {
+
+            var tweeText = new TimelineMax();
+
+//            var text = document.getElementById('text1');
+//            text.innerHTML = '<span>' +
+//                    text.innerHTML.split('').join('</span><span>') + '</span>';
+
+//            document.getElementById("animate1").onclick = function (){
+
+                var text =  new SplitText("#text1", {type:'chars'});
+                text = text.chars;
+
+                tweeText.staggerFrom(text, 1, {
+//                ease: Power2.easeOut,
+//                ease: Power2.easeInOut,
+                    cycle: {
+                        delay: function() {
+                            return Math.random() * 0.8
+                        }
+                    },
+//                cycle: {
+//                    y: function() {
+//                        return Math.random() * 1000
+//                    }
+//                },
+                    opacity: 0,
+//                fontSize: '60px',
+                });
+//            }
+
+
+//======================================================================================================================
+
+//----------------------------------------------------------------------------------------------------------------------
+
+            var tl1 = new TimelineLite,
+                    mySplitText = new SplitText("#quote", {type:"words,chars"}),
+                    chars = mySplitText.chars; //an array of all the divs that wrap each character
+
+            TweenLite.set("#quote", {perspective:400});
+
+            tl1.staggerFrom(chars, 0.8, {
+                opacity:0, scale:0, y:80, rotationX:180, transformOrigin:"0% 50% -50",  ease:Back.easeOut
+            }, 0.01, "+=0");
+
+//----------------------------------------------------------------------------------------------------------------------
+
+            var titleText = new SplitText(".wrapper h2", {
+                        type: "chars"
+                    }),
+                    numTitleChars = titleText.chars.length,
+
+                    tl2 = new TimelineMax({
+//                        delay: 0.1, repeat: 3
+                    });
+
+            TweenLite.set(".wrapper", {visibility: "visible"});
+            tl2.staggerFrom(titleText.chars, 0.8, { ease: Back.easeOut, y: 100,
+                cycle: {
+                    delay: function() {
+                        return Math.random() * 0.8
+                    }
+                },
+                opacity: 0
+            })
+        }
+
+    </script>
+    <style>
+
+        body{
+            font-family: 'Asap', Arial, Helvetica, sans-serif;
+            color:white;
+            margin:3% 10% 0 10%;
+            overflow:hidden;
+            height: 700px;
+
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d8e0de+0,aebfbc+22,99afab+33,8ea6a2+50,829d98+67,4e5c5a+82,0e0e0e+100;Grey+3D */
+            background: #d8e0de; /* Old browsers */
+            background: -moz-linear-gradient(-45deg, #d8e0de 0%, #aebfbc 22%, #99afab 33%, #8ea6a2 50%, #829d98 67%, #4e5c5a 82%, #0e0e0e 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(-45deg, #d8e0de 0%,#aebfbc 22%,#99afab 33%,#8ea6a2 50%,#829d98 67%,#4e5c5a 82%,#0e0e0e 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(135deg, #d8e0de 0%,#aebfbc 22%,#99afab 33%,#8ea6a2 50%,#829d98 67%,#4e5c5a 82%,#0e0e0e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8e0de', endColorstr='#0e0e0e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        }
+
+        hr{
+            border: 1px solid #5873ff;
+        }
+
+
+
+        #quote{
+            margin: 20px 0px 0px 0px;
+            line-height:30px;
+            color: #fff9a8;
+            font-size: 21px;
+
+        }
+
+        #text1{
+            color: #faf3ff;
+            font-size: 34px;
+            position: absolute;
+            left: 30px;
+            top: 300px;
+        }
+
+        .btn-group{
+            position: absolute;
+            bottom: 30px;
+        }
+
+        .btn{
+            background: #414141;
+            background-image: -webkit-linear-gradient(top, #575757, #414141);
+            background-image: -moz-linear-gradient(top, #575757, #414141);
+            background-image: -ms-linear-gradient(top, #575757, #414141);
+            background-image: -o-linear-gradient(top, #575757, #414141);
+            background-image: linear-gradient(to bottom, #575757, #414141);
+            text-shadow: 0px 1px 0px #414141;
+            -webkit-box-shadow: 0px 1px 0px 414141;
+            -moz-box-shadow: 0px 1px 0px 414141;
+            box-shadow: 0px 1px 0px 414141;
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 auto;
+            -webkit-border-radius: 4;
+            -moz-border-radius: 4;
+            border-radius: 4px;
+            padding: 12px 25px;
+            font-family: "Signika Negative",sans-serif;
+            text-transform: uppercase;
+            font-weight: 600;
+            display: inline-block;
+            cursor: pointer;
+            font-size: 13px;
+            line-height: 18px;
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+
+<div id="text1" class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, vero.</div>
+<hr>
+<div id="quote">SplitText makes it easy to break apart the text in an HTML element so that each character, word, and/or line is wrapped in its own div tag.</div>
+<hr>
+<div class="wrapper">
+    <h2>Stagger Effects with Cycle</h2>
+</div>
+
+<div class="btn-group">
+    <button id="animate1" class="btn">effect1</button>
+    <button id="animate2" class="btn">effect2</button>
+    <button id="animate3" class="btn">effect3</button>
+</div>
+</body>
+</html>
