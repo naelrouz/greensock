@@ -6,96 +6,203 @@
     <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>-->
     <script src="../greensock-js/src/uncompressed/TweenMax.js"></script>
     <script src="../greensock-js/src/minified/plugins/SplitText.min.js"></script>
-    <script   src="https://code.jquery.com/jquery-3.0.0.min.js"   integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="   crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"
+            integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
     <script>
+
+        function randomInteger(min, max) {
+            var rand = min - 0.5 + Math.random() * (max - min + 1)
+            rand = Math.round(rand);
+            return rand;
+        }
+
+
         window.onload = function () {
             var tweeText = new TimelineMax();
 //            var text = document.getElementById('text1');
 //            text.innerHTML = '<span>' +
 //                    text.innerHTML.split('').join('</span><span>') + '</span>';
-//            document.getElementById("animate1").onclick = function (){
-            var text =  new SplitText("#text1", {type:'chars'});
-            text = text.chars;
-            tweeText.staggerFrom(text, 1, {
+
+
+            document.getElementById("animate1").onclick = function () {
+
+                var text = new SplitText("#text1", {type: 'chars'});
+                text = text.chars;
+                tweeText.staggerFrom(text, 1, {
 //                ease: Power2.easeOut,
 //                ease: Power2.easeInOut,
-                cycle: {
-                    delay: function() {
-                        return Math.random() * 0.8
-                    }
-                },
+                    cycle: {
+                        delay: function () {
+                            return Math.random() * 0.8
+                        }
+                    },
 //                cycle: {
 //                    y: function() {
 //                        return Math.random() * 1000
 //                    }
 //                },
-                opacity: 0,
+                    opacity: 0,
 //                fontSize: '60px',
-            });
-//            }
+                });
+            }
+//----------------------------------------------------------------------------------------------------------------------
+
+
+            document.getElementById("animate2").onclick = function () {
+
+                var text = new SplitText("#text1", {type: 'chars'}), i = 1, j = 1, c = 1;
+                text = text.chars;
+                tweeText.staggerFrom(text, 0.9, {
+//                  ease: Power2.easeIn,
+                    ease: Power2.easeOut,
+//                  ease: Power4.easeOut,
+//                  ease: Back.easeOut,
+                    cycle: {
+                        delay: function () {
+                            return Math.random() * 2
+                        },
+                        y: function () {
+                            var randomY = Math.random();
+                            i++;
+                            return (i % 2) ? randomY * -100 : randomY * 100;
+                        },
+                        x: function () {
+                            var randomX = Math.random();
+                            j++;
+                            var result = (j % 2) ? randomX * 100 : randomX * -100;
+//                            console.log(result);
+                            return result;
+                        },
+                        color: function () {
+//                            var randomC = randomInteger(1,9);
+                            c++;
+                            var result = (c % 2) ? 'green' : 'red';
+                            console.log(c);
+                            return result;
+                        },
+                    },
+                    opacity: 0,
+                    scale: 8,
+                    rotate: 360,
+//                fontSize: '60px',
+                });
+            }
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
+            document.getElementById("animate3").onclick = function () {
+
+                var text = new SplitText("#text1", {type: 'chars'}), i = 1, j = 1, c = 1;
+                text = text.chars;
+                tweeText.staggerFrom(text, 0.9, {
+                    cycle: {
+                        delay: function () {
+                            return Math.random() * 1
+                        },
+                        y: function () {
+                            var randomY = Math.random();
+                            i++;
+                            return (i % 2) ? randomY * -1000 : randomY * 1000;
+                        },
+                        x: function () {
+                            var randomX = Math.random();
+                            j++;
+                            var result = (j % 2) ? randomX * -1000 : randomX * 1000;
+//                            console.log(result);
+                            return result;
+                        },
+                        color: function () {
+//                            var randomC = randomInteger(1,9);
+                            c++;
+                            var result = (c % 2) ? 'green' : 'red';
+                            console.log(c);
+                            return result;
+                        },
+                    },
+                    opacity: 0,
+                });
+            }
+//
 //======================================================================================================================
+
+            document.getElementById("animate4").onclick = function () {
+                var tl1 = new TimelineLite,
+                        mySplitText = new SplitText("#quote", {type: "words,chars"}),
+                        chars = mySplitText.chars; //an array of all the divs that wrap each character
+                TweenLite.set("#quote", {perspective: 400});
+                tl1.staggerFrom(chars, 0.8, {
+                    opacity: 0,
+                    scale: 0,
+                    y: 80,
+                    rotationX: 180,
+                    transformOrigin: "0% 50% -50",
+                    ease: Back.easeOut
+                }, 0.01, "+=0");
+            }
 //----------------------------------------------------------------------------------------------------------------------
-            var tl1 = new TimelineLite,
-                    mySplitText = new SplitText("#quote", {type:"words,chars"}),
-                    chars = mySplitText.chars; //an array of all the divs that wrap each character
-            TweenLite.set("#quote", {perspective:400});
-            tl1.staggerFrom(chars, 0.8, {
-                opacity:0, scale:0, y:80, rotationX:180, transformOrigin:"0% 50% -50",  ease:Back.easeOut
-            }, 0.01, "+=0");
-//----------------------------------------------------------------------------------------------------------------------
-            var titleText = new SplitText(".wrapper h2", {
-                        type: "chars"
-                    }),
-                    numTitleChars = titleText.chars.length,
-                    tl2 = new TimelineMax({
+            document.getElementById("animate5").onclick = function () {
+                var titleText = new SplitText(".wrapper h2", {
+                            type: "chars"
+                        }),
+                        numTitleChars = titleText.chars.length,
+                        tl2 = new TimelineMax({
 //                        delay: 0.1, repeat: 3
-                    });
-            TweenLite.set(".wrapper", {visibility: "visible"});
-            tl2.staggerFrom(titleText.chars, 0.8, { ease: Back.easeOut, y: 100,
-                cycle: {
-                    delay: function() {
-                        return Math.random() * 0.8
-                    }
-                },
-                opacity: 0
-            })
+                        });
+                TweenLite.set(".wrapper", {visibility: "visible"});
+                tl2.staggerFrom(titleText.chars, 0.8, {
+                    ease: Back.easeOut, y: 100,
+                    cycle: {
+                        delay: function () {
+                            return Math.random() * 0.8
+                        }
+                    },
+                    opacity: 0
+                });
+            }
         }
     </script>
     <style>
-        body{
+        body {
             font-family: 'Asap', Arial, Helvetica, sans-serif;
-            color:white;
-            margin:3% 10% 0 10%;
-            overflow:hidden;
-            height: 700px;
-            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d8e0de+0,aebfbc+22,99afab+33,8ea6a2+50,829d98+67,4e5c5a+82,0e0e0e+100;Grey+3D */
+            color: white;
+            margin: 3% 10% 0 10%;
+            overflow: hidden;
+            height: 900px;
+
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d8e0de+0,829d98+0,829d98+15,99afab+27,99afab+33,8ea6a2+51,91aa94+82 */
             background: #d8e0de; /* Old browsers */
-            background: -moz-linear-gradient(-45deg, #d8e0de 0%, #aebfbc 22%, #99afab 33%, #8ea6a2 50%, #829d98 67%, #4e5c5a 82%, #0e0e0e 100%); /* FF3.6-15 */
-            background: -webkit-linear-gradient(-45deg, #d8e0de 0%,#aebfbc 22%,#99afab 33%,#8ea6a2 50%,#829d98 67%,#4e5c5a 82%,#0e0e0e 100%); /* Chrome10-25,Safari5.1-6 */
-            background: linear-gradient(135deg, #d8e0de 0%,#aebfbc 22%,#99afab 33%,#8ea6a2 50%,#829d98 67%,#4e5c5a 82%,#0e0e0e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8e0de', endColorstr='#0e0e0e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+            background: -moz-linear-gradient(-45deg, #d8e0de 0%, #829d98 0%, #829d98 15%, #99afab 27%, #99afab 33%, #8ea6a2 51%, #91aa94 82%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(-45deg, #d8e0de 0%, #829d98 0%, #829d98 15%, #99afab 27%, #99afab 33%, #8ea6a2 51%, #91aa94 82%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(135deg, #d8e0de 0%, #829d98 0%, #829d98 15%, #99afab 27%, #99afab 33%, #8ea6a2 51%, #91aa94 82%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d8e0de', endColorstr='#91aa94', GradientType=1); /* IE6-9 fallback on horizontal gradient */
         }
-        hr{
+
+        hr {
             border: 1px solid #5873ff;
         }
-        #quote{
+
+        #quote {
             margin: 20px 0px 0px 0px;
-            line-height:30px;
+            line-height: 30px;
             color: #fff9a8;
             font-size: 21px;
         }
-        #text1{
+
+        #text1 {
+            display: inline-block;
+            border: 1px solid #ff0096;
+            margin: 0px 100px 0px auto;
             color: #faf3ff;
             font-size: 34px;
-            position: absolute;
-            left: 30px;
-            top: 300px;
         }
-        .btn-group{
+
+        .btn-group {
             position: absolute;
             bottom: 30px;
         }
-        .btn{
+
+        .btn {
             background: #414141;
             background-image: -webkit-linear-gradient(top, #575757, #414141);
             background-image: -moz-linear-gradient(top, #575757, #414141);
@@ -113,7 +220,7 @@
             -moz-border-radius: 4;
             border-radius: 4px;
             padding: 12px 25px;
-            font-family: "Signika Negative",sans-serif;
+            font-family: "Signika Negative", sans-serif;
             text-transform: uppercase;
             font-weight: 600;
             display: inline-block;
@@ -125,9 +232,16 @@
 </head>
 <body>
 
-<div id="text1" class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, vero.</div>
+<div id="text1" class="text">
+    Не тебе песнь любви я пою,<br>
+    А твоей красоте ненаглядной.
+</div>
+
 <hr>
-<div id="quote">SplitText makes it easy to break apart the text in an HTML element so that each character, word, and/or line is wrapped in its own div tag.</div>
+
+<div id="quote">SplitText makes it easy to break apart the text in an HTML element so that each character, word, and/or
+    line is wrapped in its own div tag.
+</div>
 <hr>
 <div class="wrapper">
     <h2>Stagger Effects with Cycle</h2>
@@ -137,6 +251,9 @@
     <button id="animate1" class="btn">effect1</button>
     <button id="animate2" class="btn">effect2</button>
     <button id="animate3" class="btn">effect3</button>
+    <button id="animate4" class="btn">effect4</button>
+    <button id="animate5" class="btn">effect5</button>
+    <button id="animate6" class="btn">effect6</button>
 </div>
 </body>
 </html>
