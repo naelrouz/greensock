@@ -23,7 +23,7 @@
         }
 
         function splitToWords(e) {
-            text1.innerHTML = '<div>' + text1.innerHTML.split(' ').join('</div> <div>') + '</div>';
+            e.innerHTML = '<div>' + e.innerHTML.split(' ').join('</div> <div>') + '</div>';
         }
 
         window.onload = function () {
@@ -39,10 +39,6 @@
 //            var text1 = document.getElementById('text1');
 ////            text1.innerHTML = '<div>' +
 ////                    text1.innerHTML.split(' ').join('</div> <div>') + '</div>';
-//
-//            var textChars = $('#text1 span');
-////                    textChars = new SplitText("#text1", {type: 'chars'});
-////                    textChars = textChars.chars;
 
 
             document.getElementById("animate1").onclick = function () {
@@ -252,25 +248,23 @@
         }
 
         .btn {
-            background: #204757;
-            text-shadow: 0px 1px 0px #414141;
-            -webkit-box-shadow: 0px 1px 0px #414141;
-            -moz-box-shadow: 0px 1px 0px #414141;
-            box-shadow: 0px 1px 0px #414141;
-            color: #ffffff;
-            text-decoration: none;
-            margin: 0 auto;
-            -webkit-border-radius: 4px;
-            -moz-border-radius: 4px;
-            border-radius: 4px;
-            padding: 12px 25px;
-            font-family: "Signika Negative", sans-serif;
-            /*text-transform: uppercase;*/
-            font-weight: 600;
-            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            text-align: center;
             cursor: pointer;
-            font-size: 13px;
-            line-height: 18px;
+            outline: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        }
+        .btn:hover {background-color: #3e8e41}
+
+        .btn:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
         }
     </style>
 </head>
