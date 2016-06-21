@@ -10,6 +10,13 @@
             crossorigin="anonymous"></script>
     <script>
 
+        $(window).on('load', function () {
+            var $preloader = $('#page-preloader'),
+                    $spinner = $preloader.find('.spinner');
+            $spinner.fadeOut();
+            $preloader.delay(13500).fadeOut('slow');
+        });
+
         function randomInteger(min, max) {
             var rand = min - 0.5 + Math.random() * (max - min + 1);
             rand = Math.round(rand);
@@ -23,7 +30,9 @@
         }
 
         function splitToWords(e) {
-            e.innerHTML = '<div>' + e.innerHTML.split(' ').join('</div> <div>') + '</div>';
+            e.children().andSelf().contents().each(function () {
+                e.text = '<div>' + e.text().split(' ').join('</div> <div>') + '</div>';
+            });
         }
 
         window.onload = function () {
@@ -34,7 +43,7 @@
 
 
             var animatedText = $('#text1 span');
-            animatedText.css('letter-spacing', '10px');
+//            animatedText.css('letter-spacing', '10px');
 
 //            var text1 = document.getElementById('text1');
 ////            text1.innerHTML = '<div>' +
@@ -174,7 +183,7 @@
 
 //                TweenLite.set(animatedText, {letterSpacing: '5px'});
                 TimelineMax1.staggerFrom(animatedText, 1, {
-                ease: Power2.easeOut,
+                    ease: Power2.easeOut,
 //                ease: Power2.easeInOut,
                     cycle: {
                         delay: function () {
@@ -191,11 +200,12 @@
             document.getElementById("animate7").onclick = function () {
                 var animatedText = $('#text1 span');
                 TimelineMax1.staggerFrom(animatedText, 0.8, {
-                    scale:4,
-                    autoAlpha:0,
-                    rotationX:-180,
-                    transformOrigin:"100% 50%",
-                    ease:Back.easeOut}, 0.02);
+                    scale: 4,
+                    autoAlpha: 0,
+                    rotationX: -180,
+                    transformOrigin: "100% 50%",
+                    ease: Back.easeOut
+                }, 0.02);
             }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -205,11 +215,12 @@
                 splitToWords(text1);
                 var animatedText = $('#text1 span');
                 TimelineMax1.staggerFrom(animatedText, 0.8, {
-                    scale:4,
-                    autoAlpha:0,
-                    rotationX:-180,
-                    transformOrigin:"100% 50%",
-                    ease:Back.easeOut}, 0.02);
+                    scale: 4,
+                    autoAlpha: 0,
+                    rotationX: -180,
+                    transformOrigin: "100% 50%",
+                    ease: Back.easeOut
+                }, 0.02);
             }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -219,10 +230,10 @@
         body {
             font-family: 'Asap', Arial, Helvetica, sans-serif;
             color: white;
-            padding: 3% 10% 0 20%;
             overflow: hidden;
             height: 900px;
-
+            margin: 0px;
+            padding: 0px;
             /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d8e0de+0,829d98+0,829d98+15,99afab+27,99afab+33,8ea6a2+51,91aa94+82 */
             background: #d8e0de; /* Old browsers */
             background: -moz-linear-gradient(-45deg, #d8e0de 0%, #829d98 0%, #829d98 15%, #99afab 27%, #99afab 33%, #8ea6a2 51%, #91aa94 82%); /* FF3.6-15 */
@@ -232,9 +243,11 @@
         }
 
         #text1 {
+            margin: 3% 10% 0 20%;
             color: #faf3ff;
             font-size: 34px;
             font-family: Gilda Display, serif;
+            letter-spacing: 10px;
         }
 
         #text1 span {
@@ -243,6 +256,7 @@
         }
 
         .btn-group {
+            margin-left: 50px;
             position: absolute;
             bottom: 30px;
         }
@@ -259,13 +273,32 @@
             border-radius: 15px;
             box-shadow: 0 9px #999;
         }
-        .btn:hover {background-color: #3e8e41}
+
+        .btn:hover {
+            background-color: #3e8e41
+        }
 
         .btn:active {
             background-color: #3e8e41;
             box-shadow: 0 5px #666;
             transform: translateY(4px);
         }
+
+        /*-- PRELOADER -------------------------------------------------------------------------------------------------------*/
+
+        /*#page-preloader {*/
+        /*position: fixed;*/
+        /*left: 0;*/
+        /*top: 0;*/
+        /*right: 0;*/
+        /*bottom: 0;*/
+        /*background: #000;*/
+        /*z-index: 100500;*/
+        /*}*/
+
+
+
+
     </style>
 </head>
 <body>
